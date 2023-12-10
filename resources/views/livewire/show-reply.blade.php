@@ -12,8 +12,24 @@
                 <p class="text-white/70">
                     {{ $reply->body }}
                 </p>
+
+                {{-- formulario --}}
+                @if ($is_creating)
+                    <form wire:submit.prevent='postChild' class="flex flex-row gap-1 mt-4">
+                        <input type="text"
+                            class="bg-slate-800 border-1 border-slate-900 rounded-md w-full p-3 text-white/60 text-xs"
+                            placeholder="Escribe una respuesta" wire:model='body'>
+                        <button type="submit"
+                            class="block w-1/2 md:w-1/4 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-semibold text-sm text-center rounded-md">
+                            Enviar Respuesta
+                        </button>
+                    </form>
+                @endif
+
                 <p class="mt-4 text-white/70 flex gap-2 justify-end">
-                    <a href="" class="hover:text-white">Responder</a>
+                    @if (is_null($reply->reply_id))
+                        <a href="" wire:click.prevent='$toggle("is_creating")' class="hover:text-white">Responder</a>
+                    @endif
                     <a href="" class="hover:text-white">Editar</a>
                 </p>
             </div>
@@ -23,7 +39,7 @@
     {{-- respuestas --}}
     @foreach ($reply->replies as $item)
         <div class="ml-12">
-            @livewire('show-reply', ['reply' => $item], key('reply-'.$item->id))
+            @livewire('show-reply', ['reply' => $item], key('reply-' . $item->id))
         </div>
     @endforeach
 </div>
