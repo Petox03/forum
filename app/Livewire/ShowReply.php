@@ -17,16 +17,22 @@ class ShowReply extends Component
 
     //Capta un cambio en una variable
     public function updatedIsEditing(){
+        //Sólo si yo hice la respuesta la puedo editar
+        $this->authorize('update', $this->reply);
+        //Si está editando cancela el crear respuesta y pone en el input el body de esa respuesta
         $this->is_creating = false;
         $this->body = $this->reply->body;
     }
+    //Cancela el editar
     public function updatedIsCreating(){
         $this->is_editing = false;
         $this->body = "";
     }
 
+    //Crea una respuesta hija
     public function postChild(){
 
+        //Si el id de la respuesta no es nulo impide mandar otra respuesta hija
         if( !is_null($this->reply->reply_id)) return;
 
         /* Validar */
@@ -39,14 +45,19 @@ class ShowReply extends Component
             'body' => $this->body
         ]);
 
+        //Borra todo el cuerpo
         $this->body = '';
         $this->is_creating = false;
 
         /* Parece que no es necesario */
         //$this->dispatch('refresh')->self();
     }
-    
+
+    //Actualiza una respuesta
     public function updateReply(){
+
+        //Sólo si yo hice la respuesta la puedo editar
+        $this->authorize('update', $this->reply);
 
         /* Validar */
         $this->validate(['body' => 'required']);
