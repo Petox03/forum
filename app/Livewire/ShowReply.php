@@ -10,9 +10,20 @@ class ShowReply extends Component
     public Reply $reply;
     public $body = '';
     public $is_creating = false;
+    public $is_editing = false;
 
     /* Este evento no es necesario sólo que está en el curso */
     //protected $listener = ['refresh' => '$refresh'];
+
+    //Capta un cambio en una variable
+    public function updatedIsEditing(){
+        $this->is_creating = false;
+        $this->body = $this->reply->body;
+    }
+    public function updatedIsCreating(){
+        $this->is_editing = false;
+        $this->body = "";
+    }
 
     public function postChild(){
 
@@ -33,6 +44,20 @@ class ShowReply extends Component
 
         /* Parece que no es necesario */
         //$this->dispatch('refresh')->self();
+    }
+    
+    public function updateReply(){
+
+        /* Validar */
+        $this->validate(['body' => 'required']);
+
+        /* update */
+        $this->reply->update([
+            'body' => $this->body
+        ]);
+
+        $this->body = '';
+        $this->is_editing = false;
     }
 
     public function render()

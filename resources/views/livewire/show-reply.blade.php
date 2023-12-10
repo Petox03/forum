@@ -9,9 +9,23 @@
                     {{ $reply->user->name }}
                     <span class="float-right text-white/90">{{ $reply->created_at->diffForHumans() }}</span>
                 </p>
-                <p class="text-white/70">
-                    {{ $reply->body }}
-                </p>
+
+                {{-- formulario / vista respuesta --}}
+                @if ($is_editing)
+                    <form wire:submit.prevent='updateReply' class="flex flex-row gap-1 mt-4">
+                        <input type="text"
+                            class="bg-slate-800 border-1 border-slate-900 rounded-md w-full p-3 text-white/60 text-xs"
+                            placeholder="Escribe una respuesta" wire:model='body'>
+                        <button type="submit"
+                            class="block w-1/2 md:w-1/4 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-semibold text-sm text-center rounded-md">
+                            Editar Respuesta
+                        </button>
+                    </form>
+                @else
+                    <p class="text-white/70">
+                        {{ $reply->body }}
+                    </p>
+                @endif
 
                 {{-- formulario --}}
                 @if ($is_creating)
@@ -21,16 +35,17 @@
                             placeholder="Escribe una respuesta" wire:model='body'>
                         <button type="submit"
                             class="block w-1/2 md:w-1/4 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-semibold text-sm text-center rounded-md">
-                            Enviar Respuesta
+                            Responder
                         </button>
                     </form>
                 @endif
 
                 <p class="mt-4 text-white/70 flex gap-2 justify-end">
                     @if (is_null($reply->reply_id))
-                        <a href="" wire:click.prevent='$toggle("is_creating")' class="hover:text-white">Responder</a>
+                        <a href="" wire:click.prevent='$toggle("is_creating")'
+                            class="hover:text-white">Responder</a>
                     @endif
-                    <a href="" class="hover:text-white">Editar</a>
+                    <a href="" wire:click.prevent='$toggle("is_editing")' class="hover:text-white">Editar</a>
                 </p>
             </div>
         </div>
