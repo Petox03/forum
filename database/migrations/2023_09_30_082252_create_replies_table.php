@@ -14,22 +14,22 @@ return new class extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')
+            $table->unsignedBigInteger('reply_id')->nullable();
+            $table->foreign('reply_id')
                 ->references('id')
                 ->on('replies')
                 ->onDelete('set null');
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
 
             $table->unsignedBigInteger('thread_id');
             $table->foreign('thread_id')
                 ->references('id')
                 ->on('threads')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
                 ->onDelete('cascade');
 
             $table->text('body');

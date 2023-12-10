@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-10 py-12">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 gap-10 py-12">
     <div class="rounded-md bg-gradient-to-r from-slate-800 to-slate-900 hover:to-slate-800 mb-4">
         <div class="p-4 flex gap-4">
             <div>
@@ -27,6 +27,17 @@
     </div>
 
     {{-- respuestas --}}
+    <form wire:submit.prevent='postReply' class="flex flex-row gap-1">
+        <input type="text"
+        class="bg-slate-800 border-0 rounded-md w-full p-3 text-white/60 text-xs"
+        placeholder="Escribe una respuesta"
+        wire:model='body'>
+        <button
+        type="submit"
+        class="block w-1/2 md:w-1/4 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-semibold text-sm text-center rounded-md">
+            Enviar Respuesta
+        </button>
+    </form>
 
     {{-- formulario --}}
 </div>
