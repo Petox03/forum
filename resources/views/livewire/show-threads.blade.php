@@ -16,7 +16,7 @@
                 </li>
             @endforeach
             <li class="mb-2">
-                <a href="" wire:click.prevent='filterByCategory("")'
+                <a href="" wire:click.prevent='searchAll()'
                     class="p-2 rounded-md flex bg-slate-800 items-center gap-2 text-white/60 hover:text-white font-semibold text-xs transition ease-in-out duration-150">
                     <span class="w-2 h-2 rounded-full bg-[#000]"></span>
                     Todos los resultados

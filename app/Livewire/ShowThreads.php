@@ -17,6 +17,11 @@ class ShowThreads extends Component
         $this->category = $category;
     }
 
+    public function searchAll(){
+        $this->category = "";
+        $this->search = "";
+    }
+
     public function render()
     {
         $categories = Category::get();
