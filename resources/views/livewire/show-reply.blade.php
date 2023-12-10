@@ -19,4 +19,11 @@
             </div>
         </div>
     </div>
+
+    {{-- respuestas --}}
+    @foreach ($reply->replies as $item)
+        <div class="ml-12">
+            @livewire('show-reply', ['reply' => $item], key('reply-'.$item->id))
+        </div>
+    @endforeach
 </div>
