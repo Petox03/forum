@@ -27,6 +27,11 @@
     </div>
 
     {{-- respuestas --}}
+    @foreach ($replies as $reply)
+        @livewire('show-reply', ['reply' => $reply], key('reply-'.$reply->id))
+    @endforeach
+
+    {{-- formulario --}}
     <form wire:submit.prevent='postReply' class="flex flex-row gap-1">
         <input type="text"
         class="bg-slate-800 border-0 rounded-md w-full p-3 text-white/60 text-xs"
@@ -38,6 +43,4 @@
             Enviar Respuesta
         </button>
     </form>
-
-    {{-- formulario --}}
 </div>
