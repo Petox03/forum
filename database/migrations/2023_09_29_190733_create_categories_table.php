@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Migración de las categorías
         Schema::create('categories', function (Blueprint $table) {
+            //id
             $table->id();
+            //Nombre de categoría
             $table->string('name');
+            //Color
             $table->string('color');
             $table->timestamps();
         });

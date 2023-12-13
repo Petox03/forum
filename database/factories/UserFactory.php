@@ -17,6 +17,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        //Va a llenar los datos de los usuarios
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),

@@ -20,7 +20,8 @@ Route::get('/', \App\Livewire\ShowThreads::class)
     ->middleware('auth')
     ->name('dashboard');
 
-    Route::get('/thread/{thread}', \App\Livewire\ShowThread::class)
+//Ruta para recibir ver las preguntas individualmente
+Route::get('/thread/{thread}', \App\Livewire\ShowThread::class)
     ->middleware('auth')
     ->name('thread');
 
@@ -29,9 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    //Ruta para agrupar las funciones del controlador
     Route::resource('threads', ThreadController::class)->except([
         'show', 'index', 'destroy'
     ]);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

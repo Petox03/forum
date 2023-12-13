@@ -16,6 +16,7 @@ class ReplyFactory extends Factory
      */
     public function definition(): array
     {
+        //Va a llenar una pregunta a la que pertenece, un usuario al que pertenece y una respuesta a las respuestas
         return [
             'thread_id' => rand(1,200),
             'user_id' => rand(1,10),

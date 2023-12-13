@@ -16,6 +16,7 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        //Va a llenar el nombre y el color de la categoría
         return [
             'name' => fake()->word(),
             'color' => fake()->hexColor(),

@@ -16,6 +16,7 @@ class ThreadFactory extends Factory
      */
     public function definition(): array
     {
+        //Va a llenar un usuario al que pertenece, un título y una pregunta a las preguntas
         return [
             'user_id' => rand(1,10),
             'title' => fake()->sentence(),

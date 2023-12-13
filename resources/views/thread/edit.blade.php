@@ -6,12 +6,17 @@
                     Editar Pregunta
                 </h2>
 
+                {{-- Form que manda a la ruta update de las preguntas --}}
                 <form action="{{ route('threads.update', $thread) }}" method="POST">
+                    {{-- medida de seguridad para protegerse contra ataques de falsificación de solicitudes entre sitios --}}
                     @csrf
+                    {{-- Indicamos que es una solicitud PUT --}}
                     @method('PUT')
 
+                    {{-- Componente de formulario --}}
                     @include('thread.form')
 
+                    {{-- Submit --}}
                     <button
                         type="submit"
                         class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-semibold rounded-md">

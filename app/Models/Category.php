@@ -9,6 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
+    //Una categoría tiene a muchas preguntas
     public function threads(){
         return $this->hasMany(Thread::class);
     }

@@ -6,11 +6,15 @@
                     Preguntar a la comunidad
                 </h2>
 
+                {{-- Form que manda a la ruta store de las preguntas  --}}
                 <form action="{{ route('threads.store') }}" method="POST">
+                    {{-- medida de seguridad para protegerse contra ataques de falsificación de solicitudes entre sitios --}}
                     @csrf
 
+                    {{-- Componente de formulario --}}
                     @include('thread.form')
 
+                    {{-- Submit --}}
                     <button
                         type="submit"
                         class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:to-blue-600 text-white/90 font-semibold rounded-md">

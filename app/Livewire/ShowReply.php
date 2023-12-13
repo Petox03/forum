@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class ShowReply extends Component
 {
+    /* Variables de la respuesta */
     public Reply $reply;
     public $body = '';
     public $is_creating = false;
@@ -17,7 +18,7 @@ class ShowReply extends Component
 
     //Capta un cambio en una variable
     public function updatedIsEditing(){
-        //Sólo si yo hice la respuesta la puedo editar
+        //Sólo el usuario que creó la respuesta puede editarla
         $this->authorize('update', $this->reply);
         //Si está editando cancela el crear respuesta y pone en el input el body de esa respuesta
         $this->is_creating = false;
@@ -25,6 +26,7 @@ class ShowReply extends Component
     }
     //Cancela el editar
     public function updatedIsCreating(){
+        /* Si está creando entonces cancela la edición y reinciia el cuerpo */
         $this->is_editing = false;
         $this->body = "";
     }
@@ -67,6 +69,7 @@ class ShowReply extends Component
             'body' => $this->body
         ]);
 
+        /* Reinicia los valores de la respuesta y cancela la edición */
         $this->body = '';
         $this->is_editing = false;
     }

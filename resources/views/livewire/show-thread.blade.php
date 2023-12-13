@@ -1,11 +1,13 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 gap-10 py-12">
     <div class="rounded-md bg-gradient-to-r from-slate-800 to-slate-900 hover:to-slate-800 mb-4">
         <div class="p-4 flex gap-4">
+            {{-- Avatar del usuario --}}
             <div>
                 <img class="rounded-md" src="{{ $thread->user->avatar() }}" alt="{{ $thread->user->name }}">
             </div>
             <div class="w-full">
                 <h2 class="mb-4 flex items-start justify-between">
+                    {{-- * --}}
                     <a href="{{ route('thread', $thread) }}" class="text-xl font-semibold text-white/90">
                         {{ $thread->title }}
                     </a>
@@ -14,6 +16,7 @@
                         {{ $thread->category->name }}
                     </span>
                 </h2>
+                {{-- Imprime los datos de la pregunta --}}
                 <p class="mb-4 text-blue-600 font-semibold text-xs">
                     {{ $thread->user->name }}
 
@@ -26,12 +29,13 @@
         </div>
     </div>
 
-    {{-- respuestas --}}
+    {{-- Por cada respuesta que tenga una pregunta --}}
     @foreach ($replies as $reply)
+        {{-- Llama al componente de las respuestas y manda sus datos --}}
         @livewire('show-reply', ['reply' => $reply], key('reply-'.$reply->id))
     @endforeach
 
-    {{-- formulario --}}
+    {{-- formulario para crear una respuesta padre --}}
     <form wire:submit.prevent='postReply' class="flex flex-row gap-1">
         <input type="text"
         class="bg-slate-800 border-0 rounded-md w-full p-3 text-white/60 text-xs"

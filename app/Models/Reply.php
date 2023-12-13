@@ -15,12 +15,15 @@ class Reply extends Model
         'body'
     ];
 
+    //Una respuesta pertenece a un usuario
     public function user(){
         return $this->belongsTo(User::class);
     }
+    //Una respuesta pertenece a una pregunta
     public function thread(){
         return $this->belongsTo(Thread::class);
     }
+    //Una respuesta tiene muchas respuestas
     public function replies(){
         return $this->hasMany(Reply::class);
     }

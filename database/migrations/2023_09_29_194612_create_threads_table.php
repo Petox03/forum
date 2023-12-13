@@ -12,22 +12,28 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Migración de la tabla de las preguntas
         Schema::create('threads', function (Blueprint $table) {
+            //id
             $table->id();
 
+            //Relación con las categorías
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')
                 ->onDelete('cascade');
 
+            //Relación con los usuarios
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
+            //Título de la pregunta
             $table->string('title');
+            //Descripción
             $table->text('body');
 
             $table->timestamps();

@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    //Validaciones de usuario
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -43,12 +44,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //Retorna el avatar del usuario dependiendo de si su email está registrado
     public function avatar(){
         return 'https://gravatar.com/avatar/' . md5($this->email) . '?s=50';
     }
+
+    //Un usuario tiene muchas preguntas
     public function threads(){
         return $this->hasMany(Thread::class);
     }
+
+    //Un usuario tiene muchas respuestas
     public function replies(){
         return $this->hasMany(Reply::class);
     }
