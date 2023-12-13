@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Thread;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowThread extends Component
 {
@@ -29,6 +30,7 @@ class ShowThread extends Component
             'replies' => $this->thread
                 ->replies()
                 ->whereNull('reply_id')
+                ->with('user', 'replies.user', 'replies.replies')
                 ->get()
         ]);
     }

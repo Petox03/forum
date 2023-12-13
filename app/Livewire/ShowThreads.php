@@ -6,14 +6,19 @@ use App\Models\Category;
 use App\Models\Thread;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowThreads extends Component
 {
+
+    use WithPagination;
 
     public $search = '';
     public $category = '';
 
     public function filterByCategory($category){
+        //Reinicia la página para que no te pongas en una paginación incorrecta al filtrar categorías
+        $this->resetPage();
         $this->category = $category;
     }
 
@@ -33,12 +38,13 @@ class ShowThreads extends Component
             $threads->where('category_id', $this->category);
         }
 
+        $threads->with('user', 'category');
         $threads->withCount('replies');
         $threads->latest();
 
         return view('livewire.show-threads', [
             'categories' => $categories,
-            'threads' => $threads->get(),
+            'threads' => $threads->paginate(5),
         ]);
     }
 }

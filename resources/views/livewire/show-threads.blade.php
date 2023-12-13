@@ -67,5 +67,8 @@
             </div>
         </div>
         @endforeach
+        <div class="text-white/60">
+            {{ $threads->links() }}
+        </div>
     </div>
 </div>
